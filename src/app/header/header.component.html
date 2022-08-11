@@ -1,0 +1,17 @@
+
+<h1 class="title">Курс валют на {{today | date:'yyyy-MM-dd'}}</h1>
+
+<div class="courses flex flex-row">
+    <div class="course-item card card-body"  *ngIf="response">
+        <div class="course-item-title">Курс USD</div>
+        <div class="course-item-value" data-value="USD">{{response[25].rate}}</div>
+    </div>
+    <div class="course-item card card-body" *ngIf="response">
+        <div class="course-item-title">Курс EUR</div>
+        <div class="course-item-value" data-value="EUR">{{response[32].rate}}</div>
+    </div>
+    <div class="course-item card card-body" *ngIf="response">
+        <div class="course-item-title">Курс GPB</div>
+        <div class="course-item-value" data-value="GBP">{{response[24].rate}}</div>
+    </div>
+</div>

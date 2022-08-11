@@ -1,0 +1,19 @@
+.courses {
+    display: flex;
+    justify-content: space-between;
+}
+.course-item:nth-child(2) {
+    margin: 0 10px 0 10px;
+}
+.course-item-title {
+    text-align: center;
+}
+
+.course-item-value {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    padding: 15px;
+}

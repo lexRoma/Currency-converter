@@ -1,0 +1,65 @@
+<div class="form_wrapper">
+    <h2>Оберіть валюти</h2>
+    <button  class="button">Стерти</button>
+    <div class="row mb-1 ">
+        <div class="col">
+            <label for="name"></label>
+            <select
+                
+                class="form-control"
+                id="Select1"
+            >
+                <option value="UAH" selected>UAH — Гривні</option>
+                <option value="USD">USD — Долар США</option>
+                <option value="EUR">EUR — Евро</option>
+                <option value="GBP">GPB — Фунт стерлингов</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="name"></label>
+            <select
+                id="Select2"
+                class="form-control"
+                id="exampleFormControlSelect1"
+            >
+                <option value="UAH" >UAH — Гривні</option>
+                <option value="USD" selected>USD — Долар США</option>
+                <option value="EUR">EUR — Евро</option>
+                <option value="GBP">GPB — Фунт стерлингов</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <input
+                id="input1"
+                #input1
+                type="number"
+                class="form-control"
+                
+                autofocus
+                (keyup)="getValue1(input1.value)"
+                [value]="currencyInput_1"
+                (input)="inputHandler1($event)"
+                
+            />
+        </div>
+        <div class="col">
+            <input
+                id="input2"
+                #input2
+                type="number"
+                class="form-control"
+                (keyup)="getValue2(input2.value)"
+                (input)="inputHandler2($event)"
+                [value]="currencyInput_2"
+                
+                
+            />
+        </div>
+    </div>
+</div>
+
+
+<!-- (click)="inputHandler($event)" -->
