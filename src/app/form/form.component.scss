@@ -11,6 +11,23 @@ label {
     color: aquamarine;
 }
 
+.button_clear {
+    border-color: #ced4da;
+    &:hover {
+        background-color: #ced4da;
+    }
+}
+
+.form_title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.choose_text {
+    width: 70%;
+    margin: 0;
+}
+
 // .courses > *:first-child {
 //     margin-left: 0;
 // }

@@ -1,31 +1,36 @@
 <div class="form_wrapper">
-    <h2>Оберіть валюти</h2>
-    <button  class="button">Стерти</button>
+    <div class="form_title">
+        <p class="choose_text">Оберіть валюти</p>
+        <button (click)="clear($event)" class="btn btn-default button_clear">Стерти</button>
+    </div>
+    
     <div class="row mb-1 ">
         <div class="col">
-            <label for="name"></label>
+            <!-- <label for="name"></label> -->
             <select
+                [(ngModel)]="selectedOption1"
                 
                 class="form-control"
                 id="Select1"
+                
+                [value]="selectedOption1"
+                (click)="selectedOptionChanged1($event)"
             >
-                <option value="UAH" selected>UAH — Гривні</option>
-                <option value="USD">USD — Долар США</option>
-                <option value="EUR">EUR — Евро</option>
-                <option value="GBP">GPB — Фунт стерлингов</option>
+                <option *ngFor="let item of options" [value]="item.id" >{{item.name}}</option>
+                
             </select>
         </div>
         <div class="col">
-            <label for="name"></label>
+            <!-- <label for="name"></label> -->
             <select
+                [(ngModel)]="selectedOption2"
                 id="Select2"
                 class="form-control"
                 id="exampleFormControlSelect1"
+                [value]="selectedOption2"
+                (click)="selectedOptionChanged2($event)"
             >
-                <option value="UAH" >UAH — Гривні</option>
-                <option value="USD" selected>USD — Долар США</option>
-                <option value="EUR">EUR — Евро</option>
-                <option value="GBP">GPB — Фунт стерлингов</option>
+            <option *ngFor="let item of options" [value]="item.id" >{{item.name}}</option>
             </select>
         </div>
     </div>
