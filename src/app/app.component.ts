@@ -15,18 +15,10 @@ export class AppComponent {
   currId: string = "";
   response: any;
 
-  constructor(private http: HttpClient) {
+  constructor() {
 
   }
-  search() {
-    this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currName)
-    .subscribe((response)=> {
-      this.response = response;
-      console.log(response);
-      console.log(this.response.cc)
-    })
-
-  }
+  
 }
 
 

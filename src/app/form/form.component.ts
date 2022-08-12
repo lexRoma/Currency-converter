@@ -13,38 +13,24 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class FormComponent implements OnInit{
-    // inputSelected = document.querySelector('input:focus').value;
     
-    
-    // =========================
-    constructor(private http: HttpClient) {
-        
-    }
+    constructor(private http: HttpClient) {}
 
     public currencyData: any;
 
-    // constructor(private currencyDataService: CurrencyDataService) {
-    //     this.currencyData = currencyDataService.getCurrencyData();
-    // }
+    
     ngOnInit(): void {
         this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currId)
         .subscribe((response)=> {
         this.response = response;
-        console.log(response);
+        // console.log(response);
         })
 
-        
-
-        console.log(this.currencyIndex_1, this.currencyIndex_2)
-
-
+        // console.log(this.currencyIndex_1, this.currencyIndex_2)
 
     }
 
-    getIndex() {
-        this.currencyIndex_1 = 1;
-        this.currencyIndex_2 = this.response[25].rate;
-    }
+
     
 
     response: any;
@@ -62,13 +48,6 @@ export class FormComponent implements OnInit{
     disabledValue1 = true;
     disabledValue2 = true;
 
-    // USD = this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currId)
-    //     .subscribe((response)=> {
-    //     this.response = response;
-    //     // console.log(response);
-    // })
-
-    //==========================
 
     options = [
         { id: 'not-choosed', name: 'Оберіть валюту' },
@@ -77,30 +56,23 @@ export class FormComponent implements OnInit{
         { id: 'EUR', name: 'EUR — Евро' },
         { id: 'GBP', name: 'GPB — Фунт стерлингов' }
     ];
-    public selectedOption1 = "not-choosed";
 
+    public selectedOption1 = "not-choosed";
     public selectedOption2 = "not-choosed";
 
 
     public selectedOptionChanged1( event: any): void {
-        
-
-        
+      
         console.log(event)
         console.log(this.response)
-        // console.log(typeof(this.selectedOption1))
-
-        var currencies = [
-                
+        
+        var currencies = [        
             {name: 'UAH', rate: 1},
             {name: 'USD', rate: this.response[25].rate},
             {name: 'EUR', rate: this.response[32].rate},
             {name: 'GBP', rate: this.response[24].rate}
         ]
 
-        // if (this.selectedOption == 'USD') {
-        //     this.currencyIndex_1 = this.response[25].rate
-        // }
         
         console.log(this.selectedOption1);
 
@@ -109,7 +81,7 @@ export class FormComponent implements OnInit{
                
                 if (this.selectedOption1 === element.name) {
                     this.currencyIndex_1 = Number(element.rate)
-                    console.log(this.currencyIndex_1)
+                    // console.log(this.currencyIndex_1)
                 } else {
                     // console.log("no")
                 } 
@@ -118,8 +90,7 @@ export class FormComponent implements OnInit{
                 
             }
         });
-        // var input: HTMLInputElement = document.getElementById('input1');
-        // input.disabled = false;
+        
         if (this.selectedOption1 == 'not-choosed') {
             this.disabledValue1 = true;
         } else {
@@ -127,16 +98,12 @@ export class FormComponent implements OnInit{
         }
         
         
-        // console.log(this.currencyIndex_1)
     }
 
-    public selectedOptionChanged2( event: any): void {
-
+    public selectedOptionChanged2( event: any): void {   
         
+        // console.log(event)
         
-        console.log(event)
-        // console.log(typeof(this.selectedOption2))
-
         var currencies = [
                 
             {name: 'UAH', rate: 1},
@@ -144,9 +111,7 @@ export class FormComponent implements OnInit{
             {name: 'EUR', rate: this.response[32].rate},
             {name: 'GBP', rate: this.response[24].rate}
         ]
-
-        
-        
+  
         console.log(this.selectedOption2);
 
         currencies.forEach(element => {
@@ -154,7 +119,7 @@ export class FormComponent implements OnInit{
                
                 if (this.selectedOption2 === element.name) {
                     this.currencyIndex_2 = Number(element.rate)
-                    console.log(this.currencyIndex_2)
+                    // console.log(this.currencyIndex_2)
                 } else {
                     // console.log("no")
                 } 
@@ -173,10 +138,6 @@ export class FormComponent implements OnInit{
 
     
 
-    //========================
-    
-
-
     getValue1(value: string) {
         console.log(value)
 
@@ -189,9 +150,9 @@ export class FormComponent implements OnInit{
     }
 
 
-    // получаем индексы валют, высчитываем значение выводимое в инпут 2
+    
     inputHandler1(event: any) {
-        // console.log(event)
+        
         
         this.currencyInput_1 = Number(event.target.value);
 
@@ -204,39 +165,29 @@ export class FormComponent implements OnInit{
             {name: "GBP", rate: this.response[24].rate}
         ]
 
-        // var inputIndex = 1;
-        // var outputIndex = this.response[25].rate;
-        //================================================
-
+        
 
         this.currencyInput_2 = Number((this.currencyInput_1*(this.currencyIndex_1/this.currencyIndex_2)).toFixed(2));
 
-        console.log('index next',this.currencyIndex_1, this.currencyIndex_2); 
+        // console.log('index next',this.currencyIndex_1, this.currencyIndex_2); 
         
     }
 
-    // получаем индексы валют, высчитываем значение выводимое в инпут 1
+    
     inputHandler2(event: any) {
-        
         
         this.currencyInput_2 = Number(event.target.value);
 
-        //================================================
-        
 
-        console.log('handler2',this.currencyInput_2,this.currencyIndex_2,this.currencyIndex_1)
-        //================================================
-
-
+        // console.log('handler2',this.currencyInput_2,this.currencyIndex_2,this.currencyIndex_1)
+   
         this.currencyInput_1 = Number((this.currencyInput_2*(this.currencyIndex_2/this.currencyIndex_1)).toFixed(2));
 
 
-        console.log('handler2',this.currencyInput_1); 
+        // console.log('handler2',this.currencyInput_1); 
         
     }
 
-    
-    
     
     clear(event: any) {
         this.currencyInput_1 = 0;
