@@ -1,7 +1,8 @@
-import { Component, OnInit} from "@angular/core";
+
+import { Component, Input, OnInit} from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 
-import {NewServiceService} from '../new-service.service';
+
 
 
 @Component({
@@ -14,6 +15,41 @@ import {NewServiceService} from '../new-service.service';
 export class FormComponent implements OnInit{
     // inputSelected = document.querySelector('input:focus').value;
     
+    
+    // =========================
+    constructor(private http: HttpClient) {
+        
+    }
+
+    public currencyData: any;
+
+    // constructor(private currencyDataService: CurrencyDataService) {
+    //     this.currencyData = currencyDataService.getCurrencyData();
+    // }
+    ngOnInit(): void {
+        this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currId)
+        .subscribe((response)=> {
+        this.response = response;
+        console.log(response);
+        })
+
+        
+
+        console.log(this.currencyIndex_1, this.currencyIndex_2)
+
+
+
+    }
+
+    getIndex() {
+        this.currencyIndex_1 = 1;
+        this.currencyIndex_2 = this.response[25].rate;
+    }
+    
+
+    response: any;
+    currId: number = 0;
+    
     currencyInput_1 = 0;
     currencyInput_2 = 0;
 
@@ -22,32 +58,28 @@ export class FormComponent implements OnInit{
     currencyIndex_1 = 0;
     currencyIndex_2 = 0;
 
-    //=========================
-    constructor(private http: HttpClient) {
-        
-    }
+    
+    disabledValue1 = true;
+    disabledValue2 = true;
 
-
-    response: any;
-    currId: number = 0;
-
-    USD = this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currId)
-        .subscribe((response)=> {
-        this.response = response;
-        // console.log(response);
-    })
+    // USD = this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currId)
+    //     .subscribe((response)=> {
+    //     this.response = response;
+    //     // console.log(response);
+    // })
 
     //==========================
 
     options = [
+        { id: 'not-choosed', name: 'Оберіть валюту' },
         { id: 'UAH', name: 'UAH — Гривні' },
         { id: 'USD', name: 'USD — Долар США' },
         { id: 'EUR', name: 'EUR — Евро' },
         { id: 'GBP', name: 'GPB — Фунт стерлингов' }
     ];
-    public selectedOption1 = "UAH";
+    public selectedOption1 = "not-choosed";
 
-    public selectedOption2 = "USD";
+    public selectedOption2 = "not-choosed";
 
 
     public selectedOptionChanged1( event: any): void {
@@ -55,6 +87,7 @@ export class FormComponent implements OnInit{
 
         
         console.log(event)
+        console.log(this.response)
         // console.log(typeof(this.selectedOption1))
 
         var currencies = [
@@ -85,6 +118,15 @@ export class FormComponent implements OnInit{
                 
             }
         });
+        // var input: HTMLInputElement = document.getElementById('input1');
+        // input.disabled = false;
+        if (this.selectedOption1 == 'not-choosed') {
+            this.disabledValue1 = true;
+        } else {
+            this.disabledValue1 = false;
+        }
+        
+        
         // console.log(this.currencyIndex_1)
     }
 
@@ -103,9 +145,7 @@ export class FormComponent implements OnInit{
             {name: 'GBP', rate: this.response[24].rate}
         ]
 
-        // if (this.selectedOption == 'USD') {
-        //     this.currencyIndex_2 = this.response[25].rate
-        // }
+        
         
         console.log(this.selectedOption2);
 
@@ -124,6 +164,11 @@ export class FormComponent implements OnInit{
             }
         });
         console.log('index',this.currencyIndex_2)
+        if (this.selectedOption2 == 'not-choosed') {
+            this.disabledValue2 = true;
+        } else {
+            this.disabledValue2 = false;
+        }
     }
 
     
@@ -144,7 +189,7 @@ export class FormComponent implements OnInit{
     }
 
 
-
+    // получаем индексы валют, высчитываем значение выводимое в инпут 2
     inputHandler1(event: any) {
         // console.log(event)
         
@@ -170,22 +215,14 @@ export class FormComponent implements OnInit{
         
     }
 
+    // получаем индексы валют, высчитываем значение выводимое в инпут 1
     inputHandler2(event: any) {
-        // console.log(event)
+        
         
         this.currencyInput_2 = Number(event.target.value);
 
         //================================================
-        // var currencies = [
-                
-        //     {name: "UAH", rate: 1},
-        //     {name: "USD", rate: this.response[25].rate},
-        //     {name: "EUR", rate: this.response[32].rate},
-        //     {name: "GBP", rate: this.response[24].rate}
-        // ]
-
-        // var inputIndex: number = this.currencyIndex_1;
-        // var outputIndex: number = this.currencyIndex_2;
+        
 
         console.log('handler2',this.currencyInput_2,this.currencyIndex_2,this.currencyIndex_1)
         //================================================
@@ -193,16 +230,13 @@ export class FormComponent implements OnInit{
 
         this.currencyInput_1 = Number((this.currencyInput_2*(this.currencyIndex_2/this.currencyIndex_1)).toFixed(2));
 
-        // var inputSelected  = document.querySelector('input:focus');
 
         console.log('handler2',this.currencyInput_1); 
         
     }
 
     
-    ngOnInit(): void {
-        
-    }
+    
     
     clear(event: any) {
         this.currencyInput_1 = 0;

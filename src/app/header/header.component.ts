@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from "@angular/core";
 
-import {NewServiceService} from '../new-service.service';
-
-
-
 
 @Component({
     selector: 'app-header',
@@ -28,7 +24,7 @@ export class HeaderComponent {
     USD = this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currId)
         .subscribe((response)=> {
         this.response = response;
-        console.log(response);
+        // console.log(response);
     })
         // currName: string = "";
         // currId: number = 25;
