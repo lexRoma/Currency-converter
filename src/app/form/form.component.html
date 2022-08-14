@@ -15,7 +15,7 @@
                 
                 [value]="selectedOption1"
                 (click)="selectedOptionChanged1($event)"
-                (click)="inputHandler1($event)"
+                
             >
                 <option *ngFor="let item of options" [value]="item.id" >{{item.name}}</option>
                 
@@ -30,12 +30,16 @@
                 id="exampleFormControlSelect1"
                 [value]="selectedOption2"
                 (click)="selectedOptionChanged2($event)"
-                (click)="inputHandler2($event)"
+                
             >
             <option *ngFor="let item of options" [value]="item.id" >{{item.name}}</option>
             </select>
         </div>
+
+        
     </div>
+
+    <!-- (click)="inputHandler2($event)" -->
 
     <div class="row">
         <div class="col">
@@ -46,9 +50,12 @@
                 class="form-control"
                 [disabled]="disabledValue1"
                 autofocus
-                (keyup)="getValue1(input1.value)"
+                
                 [value]="currencyInput_1"
-                (input)="inputHandler1($event)"
+                
+                (keyup)="inputHandler1($event)"
+                (change)="inputHandler1($event)"
+                
                 
                 
             />
@@ -60,8 +67,9 @@
                 type="number"
                 class="form-control"
                 [disabled]="disabledValue2"
-                (keyup)="getValue2(input2.value)"
-                (input)="inputHandler2($event)"
+                
+                (keyup)="inputHandler2($event)"
+                (change)="inputHandler2($event)"
                 
                 [value]="currencyInput_2"
                 

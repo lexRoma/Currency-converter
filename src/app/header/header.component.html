@@ -1,7 +1,7 @@
 
 <h1 class="title">Курс валют на {{today | date:'dd-MM-yyy'}}</h1>
 
-<div class="courses flex flex-row">
+<!-- <div class="courses flex flex-row">
     <div class="course-item card card-body"  *ngIf="response">
         <div class="course-item-title">Курс USD</div>
         <div class="course-item-value" data-value="USD">{{response[25].rate}}</div>
@@ -14,4 +14,12 @@
         <div class="course-item-title">Курс GPB</div>
         <div class="course-item-value" data-value="GBP">{{response[24].rate}}</div>
     </div>
+</div> -->
+
+<div class="courses flex flex-row">
+    <div class="course-item card card-body"  *ngFor="let item of currencies">
+        <div class="course-item-title">Курс {{item.id}}</div>
+        <div class="course-item-value" data-value="USD">{{item.rate}}</div>
+    </div>
+    
 </div>

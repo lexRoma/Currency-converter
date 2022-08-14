@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 
 import {HeaderComponent} from './header/header.component';
 
+import { GetCurrDataService } from './get-curr-data.service';
+
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import {HeaderComponent} from './header/header.component';
     HttpClientModule,
     FormsModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [GetCurrDataService]
 })
 export class AppModule { }

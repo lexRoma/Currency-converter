@@ -1,7 +1,8 @@
 
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -11,13 +12,14 @@ import { HttpClient } from '@angular/common/http';
   
 })
 export class AppComponent {
-  currName: string = "";
-  currId: string = "";
-  response: any;
+  
 
-  constructor() {
+  // public currencyData: any;
+  // public currencies:any;
 
-  }
+  constructor() {}
+
+  
   
 }
 

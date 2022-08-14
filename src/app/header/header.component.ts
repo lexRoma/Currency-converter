@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from "@angular/core";
 
+import { GetCurrDataService } from './../get-curr-data.service';
+
 
 @Component({
     selector: 'app-header',
@@ -9,23 +11,39 @@ import { Component, OnInit } from "@angular/core";
 })
 
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
     
     today: number = Date.now();
     
 
-    constructor(private http: HttpClient) {
-      
-    }
+    constructor(private _currData: GetCurrDataService) {}
 
     response: any;
-    currId: number = 25;
+    currencies1:any;
+    
+    currencies:any;
 
-    currency = this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'+this.currId)
-        .subscribe((response)=> {
-        this.response = response;
+    ngOnInit() {
+        this._currData.getCurrData()
+        .subscribe((response) => {
+        this.currencies1 = response;
         
+
+        
+        this.response = this._currData.getData() 
+        console.log(this.response)
+        
+
+        this.currencies = [
+            {id: this.response[2].id, rate: this.response[2].rate},
+            {id: this.response[3].id, rate: this.response[3].rate},
+            {id: this.response[4].id, rate: this.response[4].rate}
+        ]
     })
+    }
+
+
+    
         
       
 };
