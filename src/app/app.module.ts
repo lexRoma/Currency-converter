@@ -1,4 +1,4 @@
-import { FormComponent } from './form/form.component';
+import { FormComponent } from './components/form/form.component';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -10,9 +10,9 @@ import { HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {HeaderComponent} from './header/header.component';
+import {HeaderComponent} from './components/header/header.component';
 
-import { GetCurrDataService } from './get-curr-data.service';
+import { GetCurrDataService } from './services/get-curr-data.service';
 
 
 

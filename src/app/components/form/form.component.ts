@@ -1,5 +1,5 @@
-import { GetCurrDataService } from './../get-curr-data.service';
-import { AppComponent } from '../app.component';
+import { GetCurrDataService } from '../../services/get-curr-data.service';
+
 import { Component, Input, OnInit} from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 
@@ -23,11 +23,11 @@ export class FormComponent implements OnInit{
 
     currId: number = 0;
     
-    currencyInput_1 = 0;
-    currencyInput_2 = 0;
+    currencyInput_1: number = 0;
+    currencyInput_2: number = 0;
 
-    currencyIndex_1 = 0;
-    currencyIndex_2 = 0;
+    currencyIndex_1: number = 0;
+    currencyIndex_2: number = 0;
   
     disabledValue1 = false;
     disabledValue2 = false;
@@ -59,7 +59,8 @@ export class FormComponent implements OnInit{
         this._currData.calcCurrInputValue1(this.currencyInput_2);
         this._currData.calcCurrInputValue2(this.currencyInput_1);
 
-    })}
+    })
+    }
 
 
     

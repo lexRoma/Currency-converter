@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from "@angular/core";
 
-import { GetCurrDataService } from './../get-curr-data.service';
+import { GetCurrDataService } from '../../services/get-curr-data.service';
 
 
 @Component({

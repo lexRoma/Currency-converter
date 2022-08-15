@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { CurrencyData } from '../models/currency-data';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,23 +20,19 @@ export class GetCurrDataService {
   currencyInput_1: number = 0;
   currencyInput_2: number = 0;
 
-  currencyIndex_1 = 0;
-  currencyIndex_2 = 0;
+  currencyIndex_1: number = 0;
+  currencyIndex_2: number = 0;
 
   disabledValue1 = true;
   disabledValue2 = true;
 
-  // selectedOption1 = 
-  //=====================
 
   constructor(private _http: HttpClient) {}
 
   
 
-  getCurrData() : Observable<Object> {
-    return this._http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json')
-    
-
+  getCurrData() : Observable<CurrencyData[]> {
+    return this._http.get<CurrencyData[]>('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json')
   }
   
   newResponse = this.getCurrData()
@@ -42,7 +40,7 @@ export class GetCurrDataService {
   this.response = res;})// it is used in getData!!
     
 
-  getData() : Observable<Object> {
+  getData() : Observable<CurrencyData[]> {
     
     
     this.currData = [
@@ -53,7 +51,7 @@ export class GetCurrDataService {
           { id: 'GBP', name: 'GPB — Фунт стерлингов', rate: this.response[24].rate },
           
         ]
-      // console.log(typeof(this.currData), "type of currdata")
+      console.log(this.response)
       return this.currData;
 
     
@@ -82,16 +80,10 @@ export class GetCurrDataService {
           { id: 'GBP', name: 'GPB — Фунт стерлингов', rate: this.response[24].rate },
           
         ]
-      console.log(typeof(currData))
+      // console.log(typeof(currData))
       return this.currData;
 
     
-
-        // this.currencyIndex_1 = this.currData[1].rate;
-        // console.log(this.currencyIndex_1)
-        // return this.currencyIndex_1;
-    
-
   }
 
   
